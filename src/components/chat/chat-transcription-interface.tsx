@@ -2,7 +2,6 @@
 
 import { AnimatePresence, motion } from "motion/react";
 import { cn } from "@/lib/utils";
-import { z } from "zod";
 
 import { useEffect, useState, useRef, type DragEvent } from "react";
 
@@ -23,17 +22,6 @@ import {
 import { AudioStatus } from "@/components/chat/audio-status";
 import { toast } from "sonner";
 import { Messages } from "@/components/chat/messages";
-
-// Define Zod schema for message input validation
-const MessageSchema = z.object({
-	content: z
-		.string()
-		.min(1, { message: "Message cannot be empty" })
-		.max(1000, { message: "Message is too long (max 1000 characters)" })
-		.refine((text) => text.trim().length > 0, {
-			message: "Message cannot be only whitespace",
-		}),
-});
 
 type ValidationError = {
 	message: string;
@@ -71,10 +59,7 @@ function TextFilePreview({ file }: { file: File }) {
 	);
 }
 
-const getTextFromDataUrl = (dataUrl: string) => {
-	const base64 = dataUrl.split(",")[1];
-	return window.atob(base64);
-};
+// Removed unused getTextFromDataUrl function
 
 export default function AiChat() {
 	const {
@@ -91,10 +76,13 @@ export default function AiChat() {
 		// run client-side tools that are automatically executed:
 		async onToolCall({ toolCall }) {
 			if (toolCall.toolName === "researchPoppyAI") {
-				// Use any as a workaround for the type issue
-				const anyToolCall = toolCall as any;
+				// Use a more specific type instead of any
+				const typedToolCall = toolCall as {
+					toolName: string;
+					parameters?: { query?: string };
+				};
 				const query =
-					anyToolCall.parameters?.query || "Tell me all about PoppyAI";
+					typedToolCall.parameters?.query || "Tell me all about PoppyAI";
 
 				// Return just the query parameter for researching Poppy AI
 				return {
@@ -111,9 +99,6 @@ export default function AiChat() {
 			return undefined;
 		},
 	});
-
-	console.log("🚀 ~ AiChat ~ messages:", messages);
-
 	const {
 		isRecording,
 		toggleRecording,
@@ -123,7 +108,7 @@ export default function AiChat() {
 		notConnected,
 	} = useAudioRecorder();
 
-	const [validationError, setValidationError] = useState<ValidationError>({
+	const [validationError] = useState<ValidationError>({
 		message: "",
 		hasError: false,
 	});
@@ -151,7 +136,6 @@ export default function AiChat() {
 	}, []);
 
 	useEffect(() => {
-		console.log("🚀 ~ AiChat ~ transcribedText:", transcribedText);
 		setInput(transcribedText);
 	}, [transcribedText, setInput]);
 
@@ -334,7 +318,7 @@ export default function AiChat() {
 						Poppy Voice Chat
 					</h1>
 					<p className="text-xl text-zinc-400">
-						Speak or type your message - I'm listening
+						Speak or type your message - I&apos;m listening
 					</p>
 				</motion.div>
 

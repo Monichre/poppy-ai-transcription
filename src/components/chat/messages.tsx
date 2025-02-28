@@ -1,9 +1,6 @@
 import { motion } from "motion/react";
 import type { Message } from "ai/react";
-import {
-	ChatBubbleAvatar,
-	ChatBubbleMessage,
-} from "@/components/chat/chat-bubble";
+import { ChatBubbleMessage } from "@/components/chat/chat-bubble";
 import { ChatBubble } from "@/components/chat/chat-bubble";
 import { ChatMessageList } from "@/components/chat/chat-message-list";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";

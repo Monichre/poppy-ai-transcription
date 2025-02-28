@@ -6,9 +6,7 @@ import { createTranscriber } from "@/services/assemblyai/create-transcriber";
 import type { RealtimeTranscriber } from "assemblyai";
 import {
 	useState,
-	useEffect,
 	useCallback,
-	useRef,
 	type Dispatch,
 	type SetStateAction,
 } from "react";
@@ -37,7 +35,9 @@ export function useAudioRecorder(): AudioRecorderReturn {
 	>(undefined);
 	const [mic, setMic] = useState<
 		| {
-				startRecording(onAudioCallback: any): Promise<void>;
+				startRecording(
+					onAudioCallback: (buffer: Uint8Array) => void
+				): Promise<void>;
 				stopRecording(): void;
 		  }
 		| undefined
@@ -79,7 +79,7 @@ export function useAudioRecorder(): AudioRecorderReturn {
 		}
 		const mic = createMicrophone(mediaStream);
 
-		mic.startRecording((audioData: any) => {
+		mic.startRecording((audioData: Uint8Array) => {
 			console.log("🚀 ~ mic.startRecording ~ audioData:", audioData);
 
 			transcriberInstance.sendAudio(audioData);
