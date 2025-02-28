@@ -14,13 +14,14 @@ import {
 interface AudioRecorderReturn {
 	isRecording: boolean;
 	transcriber: RealtimeTranscriber | undefined;
-	initializeAssemblyAI: () => Promise<void>;
+	startRecording: () => Promise<void>;
 	toggleRecording: () => void;
 	transcribedText: string;
 	updateTranscribedText: Dispatch<SetStateAction<string>>;
 	isConnecting: boolean;
 	recordingOff: () => void;
 	notConnected: () => void;
+	endAudioRecording: () => void;
 }
 
 export function useAudioRecorder(): AudioRecorderReturn {
@@ -85,28 +86,33 @@ export function useAudioRecorder(): AudioRecorderReturn {
 		setTranscriber(transcriberInstance);
 	}, []);
 
+	const endAudioRecording = useCallback(async () => {
+		setIsRecording(false);
+		setIsConnecting(false);
+		mic?.stopRecording();
+		await transcriber?.close(false);
+		setMic(undefined);
+		setTranscriber(undefined);
+	}, [mic, transcriber]);
+
 	const toggleRecording = useCallback(async () => {
 		if (isRecording) {
-			setIsRecording(false);
-			setIsConnecting(false);
-			mic?.stopRecording();
-			await transcriber?.close(false);
-			// setMic(undefined);
-			// setTranscriber(undefined);
+			endAudioRecording();
 		} else {
 			initializeAssemblyAI();
 		}
-	}, [isRecording, initializeAssemblyAI, mic, transcriber]);
+	}, [isRecording, initializeAssemblyAI, endAudioRecording]);
 
 	return {
 		isRecording,
 		transcriber,
-		initializeAssemblyAI,
+		startRecording: initializeAssemblyAI,
 		toggleRecording,
 		transcribedText,
 		updateTranscribedText,
 		recordingOff,
 		notConnected,
+		endAudioRecording,
 		isConnecting,
 	};
 }
