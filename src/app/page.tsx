@@ -1,5 +1,5 @@
-import AiChat from "@/components/kokonutui/ai-chat";
+import { Home } from "@/components/home/home";
 
-export default function Home() {
-  return <AiChat />;
+export default async function Index() {
+	return <Home />;
 }
