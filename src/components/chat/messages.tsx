@@ -1,9 +1,14 @@
+"use client";
+
 import { motion } from "motion/react";
 import type { Message } from "ai/react";
 import { ChatBubbleMessage } from "@/components/chat/chat-bubble";
 import { ChatBubble } from "@/components/chat/chat-bubble";
 import { ChatMessageList } from "@/components/chat/chat-message-list";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { TextEffect } from "@/components/ui/text-effect";
+import { MarkdownContent } from "@/components/ui/markdown-content";
 
 export function Messages({
 	messages,
@@ -35,10 +40,21 @@ export function Messages({
 								variant={message.role === "user" ? "sent" : "received"}
 							>
 								{message.parts?.map((part) => {
+									const isAssistant = message?.role === "assistant";
 									switch (part.type) {
 										// render text parts as simple text:
 										case "text":
-											return part.text;
+											return isAssistant ? (
+												<MarkdownContent
+													id={part.text.substring(0, 10)}
+													key={part.text}
+													content={part.text}
+												/>
+											) : (
+												<TextEffect per="char" preset="fade" key={part.text}>
+													{part.text}
+												</TextEffect>
+											);
 
 										// for tool invocations, distinguish between the tools and the state:
 										case "tool-invocation": {
@@ -52,8 +68,9 @@ export function Messages({
 																<div key={callId}>
 																	{part.toolInvocation.args.message}
 																	<div>
-																		<button
+																		<Button
 																			type="button"
+																			className="p-1 h-6 w-6 rounded-sm"
 																			onClick={() =>
 																				addToolResult({
 																					toolCallId: callId,
@@ -62,8 +79,9 @@ export function Messages({
 																			}
 																		>
 																			Yes
-																		</button>
-																		<button
+																		</Button>
+																		<Button
+																			className="ml-2 p-1 h-6 w-6 rounded-sm"
 																			type="button"
 																			onClick={() =>
 																				addToolResult({
@@ -73,7 +91,7 @@ export function Messages({
 																			}
 																		>
 																			No
-																		</button>
+																		</Button>
 																	</div>
 																</div>
 															);

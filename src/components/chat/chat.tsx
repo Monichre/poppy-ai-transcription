@@ -61,7 +61,7 @@ function TextFilePreview({ file }: { file: File }) {
 
 // Removed unused getTextFromDataUrl function
 
-export default function AiChat() {
+export default function Chat() {
 	const {
 		messages,
 		input,
@@ -123,6 +123,12 @@ export default function AiChat() {
 	const [browserCompatError, setBrowserCompatError] = useState<string | null>(
 		null
 	);
+
+	const resetErrors = () => {
+		setMicPermissionError(null);
+		setApiConnectionError(null);
+		setBrowserCompatError(null);
+	};
 	const fileInputRef = useRef<HTMLInputElement>(null);
 
 	// Check browser compatibility on mount
@@ -280,11 +286,7 @@ export default function AiChat() {
 				<div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 bg-red-500/80 text-white px-4 py-2 rounded-md shadow-lg max-w-md text-center">
 					{micPermissionError || apiConnectionError || browserCompatError}
 					<Button
-						onClick={() => {
-							setMicPermissionError(null);
-							setApiConnectionError(null);
-							setBrowserCompatError(null);
-						}}
+						onClick={resetErrors}
 						variant="ghost"
 						size="sm"
 						className="ml-2 p-1 h-6 w-6 rounded-full"
@@ -369,6 +371,12 @@ export default function AiChat() {
 
 							<form
 								onSubmit={handleChatSubmit}
+								onKeyDown={(e) => {
+									if (e.key === "Enter" && !e.shiftKey) {
+										e.preventDefault();
+										handleChatSubmit(e as React.FormEvent<HTMLFormElement>);
+									}
+								}}
 								className="relative bg-zinc-900 rounded-xl border border-zinc-800"
 							>
 								<Textarea

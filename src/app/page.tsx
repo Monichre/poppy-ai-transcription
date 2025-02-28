@@ -1,5 +1,5 @@
-import { Home } from "@/components/home/home";
+import { PoppyAiChat } from "@/components/poppy-ai-chat/poppy-ai-chat";
 
 export default async function Index() {
-	return <Home />;
+	return <PoppyAiChat />;
 }
