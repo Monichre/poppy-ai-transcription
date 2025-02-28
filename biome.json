@@ -26,7 +26,12 @@
 				"recommended": true,
 				"noSvgWithoutTitle": "off"
 			}
-		}
+		},
+		"ignore": [
+			"**/.next/**",
+			"**/node_modules/**",
+			"**/public/**"
+		]
 	},
 	"formatter": {
 		"enabled": true,
