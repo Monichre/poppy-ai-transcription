@@ -26,8 +26,6 @@ interface AudioRecorderReturn {
 export function useAudioRecorder(): AudioRecorderReturn {
 	const [transcribedText, setTranscribedText] = useState<string>("");
 
-	console.log("🚀 ~ useAudioRecorder ~ transcribedText:", transcribedText);
-
 	const [isRecording, setIsRecording] = useState<boolean>(false);
 	const [isConnecting, setIsConnecting] = useState<boolean>(false);
 	const [transcriber, setTranscriber] = useState<
@@ -60,8 +58,6 @@ export function useAudioRecorder(): AudioRecorderReturn {
 				},
 			});
 
-			console.log("🚀 ~ getMicrophoneStream ~ stream:", stream);
-
 			return stream;
 		};
 		const mediaStream = await getMicrophoneStream();
@@ -80,8 +76,6 @@ export function useAudioRecorder(): AudioRecorderReturn {
 		const mic = createMicrophone(mediaStream);
 
 		mic.startRecording((audioData: Uint8Array) => {
-			console.log("🚀 ~ mic.startRecording ~ audioData:", audioData);
-
 			// @ts-ignore
 			transcriberInstance.sendAudio(audioData);
 		});

@@ -25,7 +25,7 @@ export async function POST(req: Request) {
 						.string()
 						.optional()
 						.describe(
-							"Specific aspect of Poppy AI to research (features, use cases, pricing, etc.)",
+							"Specific aspect of Poppy AI to research (features, use cases, pricing, etc.)"
 						),
 				}),
 				execute: async ({
@@ -42,8 +42,6 @@ export async function POST(req: Request) {
 
 							if (scrapeResult.success) {
 								const scrapedInfo = scrapeResult.data;
-								console.log("🚀 ~ POST ~ scrapedInfo:", scrapedInfo);
-
 								return scrapedInfo;
 							}
 						} catch (error) {

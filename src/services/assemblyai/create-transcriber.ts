@@ -3,7 +3,7 @@ import { getAssemblyToken } from "@/services/assemblyai/get-assembly-token";
 import type { Dispatch, SetStateAction } from "react";
 
 export async function createTranscriber(
-	setTranscribedText: Dispatch<SetStateAction<string>>,
+	setTranscribedText: Dispatch<SetStateAction<string>>
 ): Promise<RealtimeTranscriber | undefined> {
 	const token = await getAssemblyToken();
 
@@ -32,22 +32,15 @@ export async function createTranscriber(
 	});
 
 	transcriber.on("transcript.partial", (transcript: RealtimeTranscript) => {
-		console.log("🚀 ~ transcriber.on ~ transcript:", transcript);
-
 		if (!transcript.text) {
 			//   console.error('Transcript is empty');
 			return;
 		}
-		console.log("🚀 ~ transcriber.on ~ transcript partial:", transcript);
-
 		// texts.push(transcript.text);
-		// console.log("🚀 ~ transcriber.on ~ texts:", texts);
 		setTranscribedText(transcript.text);
 	});
 
 	transcriber.on("transcript.final", (transcript: RealtimeTranscript) => {
-		console.log("🚀 ~ transcriber.on ~ transcript:", transcript);
-
 		if (!transcript.text) {
 			//   console.error('Transcript is empty');
 			return;
