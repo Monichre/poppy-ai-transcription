@@ -25,7 +25,7 @@ export async function POST(req: Request) {
 						.string()
 						.optional()
 						.describe(
-							"Specific aspect of Poppy AI to research (features, use cases, pricing, etc.)"
+							"Specific aspect of Poppy AI to research (features, use cases, pricing, etc.)",
 						),
 				}),
 				execute: async ({

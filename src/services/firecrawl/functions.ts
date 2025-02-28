@@ -9,7 +9,7 @@ export const poppyAiCompanyFirecrawlSchema = z.object({
 });
 
 export const scrapePoppyAiCompany = async (
-	prompt = "Extract the overview, features, why, results, and faq from the page."
+	prompt = "Extract the overview, features, why, results, and faq from the page.",
 ) => {
 	const result = await firecrawlApp.extract(["https://getpoppy.ai"], {
 		prompt: prompt,

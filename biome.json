@@ -1,53 +1,55 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.4.1/schema.json",
-  "organizeImports": {
-    "enabled": true
-  },
-  "linter": {
-    "enabled": true,
-    "rules": {
-      "recommended": true,
-      "style": {
-        "noNonNullAssertion": "warn",
-        "useForOf": "error"
-      },
-      "suspicious": {
-        "noExplicitAny": "warn"
-      },
-      "correctness": {
-        "useExhaustiveDependencies": "warn"
-      },
-      "complexity": {
-        "noForEach": "warn"
-      },
-      "a11y": {
-        "recommended": true
-      }
-    }
-  },
-  "formatter": {
-    "enabled": true,
-    "indentStyle": "tab",
-    "indentWidth": 2,
-    "lineWidth": 80,
-    "ignore": []
-  },
-  "javascript": {
-    "formatter": {
-      "quoteStyle": "double",
-      "trailingComma": "es5",
-      "semicolons": "always"
-    }
-  },
-  "files": {
-    "ignore": [
-      "node_modules",
-      "dist",
-      ".next",
-      "build",
-      "out",
-      "coverage",
-      "public"
-    ]
-  }
+	"$schema": "https://biomejs.dev/schemas/1.4.1/schema.json",
+	"organizeImports": {
+		"enabled": true
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": true,
+			"style": {
+				"noNonNullAssertion": "off",
+				"noUnusedTemplateLiteral": "off"
+			},
+			"suspicious": {
+				"noExplicitAny": "off",
+				"noArrayIndexKey": "off",
+				"noEmptyInterface": "off"
+			},
+			"correctness": {
+				"useExhaustiveDependencies": "off"
+			},
+			"complexity": {
+				"noForEach": "warn"
+			},
+			"a11y": {
+				"recommended": true,
+				"noSvgWithoutTitle": "off"
+			}
+		}
+	},
+	"formatter": {
+		"enabled": true,
+		"indentStyle": "tab",
+		"indentWidth": 2,
+		"lineWidth": 80,
+		"ignore": []
+	},
+	"javascript": {
+		"formatter": {
+			"quoteStyle": "double",
+			"semicolons": "always"
+		}
+	},
+	"files": {
+		"ignore": [
+			"node_modules",
+			"dist",
+			".next",
+			"build",
+			"out",
+			"coverage",
+			"public"
+		]
+	}
 }

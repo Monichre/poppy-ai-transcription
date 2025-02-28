@@ -82,7 +82,7 @@ const HighlightedPre = memo(
 				</code>
 			</pre>
 		);
-	}
+	},
 );
 
 HighlightedPre.displayName = "HighlightedPre";
@@ -257,7 +257,7 @@ const components: Partial<Components> = {
 			<code
 				className={cn(
 					"rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm",
-					className
+					className,
 				)}
 				{...props}
 			>
@@ -294,7 +294,7 @@ const MemoizedMarkdownBlock = memo(
 			return false;
 		}
 		return true;
-	}
+	},
 );
 
 MemoizedMarkdownBlock.displayName = "MemoizedMarkdownBlock";
@@ -304,21 +304,23 @@ interface MarkdownContentProps {
 	id: string;
 }
 
-export const MarkdownContent = memo(({ content, id }: MarkdownContentProps) => {
-	const blocks = useMemo(
-		() => parseMarkdownIntoBlocks(content || ""),
-		[content]
-	);
+export const MarkdownContent = memo(
+	({ content, id }: MarkdownContentProps) => {
+		const blocks = useMemo(
+			() => parseMarkdownIntoBlocks(content || ""),
+			[content],
+		);
 
-	return blocks.map((block, index) => (
-		<MemoizedMarkdownBlock
-			content={block}
-			key={`${id}-block_${
-				// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-				index
-			}`}
-		/>
-	));
-});
+		return blocks.map((block, index) => (
+			<MemoizedMarkdownBlock
+				content={block}
+				key={`${id}-block_${
+					// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+					index
+				}`}
+			/>
+		));
+	},
+);
 
 MarkdownContent.displayName = "MarkdownContent";

@@ -115,13 +115,13 @@ export default function Chat() {
 	const [files, setFiles] = useState<File[]>([]);
 	const [isDragging, setIsDragging] = useState(false);
 	const [micPermissionError, setMicPermissionError] = useState<string | null>(
-		null
+		null,
 	);
 	const [apiConnectionError, setApiConnectionError] = useState<string | null>(
-		null
+		null,
 	);
 	const [browserCompatError, setBrowserCompatError] = useState<string | null>(
-		null
+		null,
 	);
 
 	const resetErrors = () => {
@@ -135,7 +135,7 @@ export default function Chat() {
 	useEffect(() => {
 		if (!isBrowserCompatible()) {
 			setBrowserCompatError(
-				"Your browser doesn't support audio recording features. Please use a modern browser like Chrome, Firefox, or Edge."
+				"Your browser doesn't support audio recording features. Please use a modern browser like Chrome, Firefox, or Edge.",
 			);
 			toast.error("Browser compatibility issue detected");
 		}
@@ -164,7 +164,7 @@ export default function Chat() {
 		if (droppedFilesArray.length > 0) {
 			const validFiles = droppedFilesArray.filter(
 				(file) =>
-					file.type.startsWith("image/") || file.type.startsWith("text/")
+					file.type.startsWith("image/") || file.type.startsWith("text/"),
 			);
 
 			if (validFiles.length === droppedFilesArray.length) {
@@ -189,7 +189,7 @@ export default function Chat() {
 				(file) =>
 					file.type.startsWith("image/") ||
 					file.type.startsWith("text/") ||
-					file.type === "application/pdf"
+					file.type === "application/pdf",
 			);
 
 			if (validFiles.length === selectedFiles.length) {
@@ -212,7 +212,7 @@ export default function Chat() {
 
 		if (!isBrowserCompatible()) {
 			setBrowserCompatError(
-				"Your browser doesn't support audio recording features. Please use a modern browser."
+				"Your browser doesn't support audio recording features. Please use a modern browser.",
 			);
 			toast.error("Browser compatibility issue");
 			return;
@@ -229,7 +229,7 @@ export default function Chat() {
 					error.name === "NotAllowedError"
 				) {
 					setMicPermissionError(
-						"Microphone access denied. Please allow microphone access in your browser settings."
+						"Microphone access denied. Please allow microphone access in your browser settings.",
 					);
 					toast.error("Microphone permission denied");
 				}
@@ -239,7 +239,7 @@ export default function Chat() {
 					error.message.includes("connect")
 				) {
 					setApiConnectionError(
-						"Unable to connect to the transcription service. Please check your internet connection."
+						"Unable to connect to the transcription service. Please check your internet connection.",
 					);
 					toast.error("Connection to transcription service failed");
 				}
@@ -364,7 +364,7 @@ export default function Chat() {
 												/>
 												<TextFilePreview file={file} />
 											</motion.div>
-										) : null
+										) : null,
 									)}
 								</div>
 							)}
@@ -394,7 +394,7 @@ export default function Chat() {
 										"placeholder:text-white placeholder:text-base",
 										"min-h-[100px]",
 
-										validationError.hasError && "border-red-500 pr-10"
+										validationError.hasError && "border-red-500 pr-10",
 									)}
 								/>
 								{validationError.hasError && (
@@ -411,7 +411,7 @@ export default function Chat() {
 										size="icon"
 										onClick={handleUploadClick}
 										className={cn(
-											"rounded-full w-8 h-8 bg-neutral-800 border border-indigo-400/80 text-indigo-400"
+											"rounded-full w-8 h-8 bg-neutral-800 border border-indigo-400/80 text-indigo-400",
 										)}
 									>
 										<Paperclip className="w-4 h-4" />
@@ -438,7 +438,7 @@ export default function Chat() {
 											"rounded-full w-8 h-8 bg-neutral-800 border border-indigo-400/80 text-indigo-400",
 											isRecording && "bg-red-500/10 text-red-500",
 											isRecording && "opacity-50 cursor-not-allowed",
-											browserCompatError && "opacity-50 cursor-not-allowed"
+											browserCompatError && "opacity-50 cursor-not-allowed",
 										)}
 										disabled={!!browserCompatError}
 									>
@@ -453,7 +453,7 @@ export default function Chat() {
 									<Button
 										className={cn(
 											"rounded-full w-8 h-8 bg-neutral-800 border border-indigo-400/80 text-indigo-400",
-											"disabled:opacity-50 disabled:cursor-not-allowed"
+											"disabled:opacity-50 disabled:cursor-not-allowed",
 										)}
 										type="submit"
 									>

@@ -3,7 +3,7 @@ import { getAssemblyToken } from "@/services/assemblyai/get-assembly-token";
 import type { Dispatch, SetStateAction } from "react";
 
 export async function createTranscriber(
-	setTranscribedText: Dispatch<SetStateAction<string>>
+	setTranscribedText: Dispatch<SetStateAction<string>>,
 ): Promise<RealtimeTranscriber | undefined> {
 	const token = await getAssemblyToken();
 

@@ -36,7 +36,7 @@ export function useAudioRecorder(): AudioRecorderReturn {
 	const [mic, setMic] = useState<
 		| {
 				startRecording(
-					onAudioCallback: (buffer: Uint8Array) => void
+					onAudioCallback: (buffer: Uint8Array) => void,
 				): Promise<void>;
 				stopRecording(): void;
 		  }

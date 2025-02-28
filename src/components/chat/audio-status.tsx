@@ -56,7 +56,7 @@ export function AudioStatus({
 						"font-mono text-sm transition-opacity duration-300",
 						showRecording
 							? "text-black/70 dark:text-white"
-							: "text-black/30 dark:text-white"
+							: "text-black/30 dark:text-white",
 					)}
 				>
 					{formatTime(time)}
@@ -70,14 +70,14 @@ export function AudioStatus({
 								"w-0.5 rounded-full transition-all duration-300",
 								showRecording
 									? "bg-black/50 dark:bg-white/90 animate-pulse"
-									: "bg-black/10 dark:bg-white/60 h-1"
+									: "bg-black/10 dark:bg-white/60 h-1",
 							)}
 							style={
 								showRecording && isClient
 									? {
 											height: `${20 + Math.random() * 80}%`,
 											animationDelay: `${i * 0.05}s`,
-										}
+									  }
 									: undefined
 							}
 						/>

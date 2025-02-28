@@ -17,7 +17,7 @@ export function createMicrophone(stream: MediaStream) {
 				await audioContext.audioWorklet.addModule("audio-processor.js");
 				audioWorkletNode = new AudioWorkletNode(
 					audioContext,
-					"audio-processor"
+					"audio-processor",
 				);
 
 				source.connect(audioWorkletNode);
@@ -34,7 +34,7 @@ export function createMicrophone(stream: MediaStream) {
 						const totalSamples = Math.floor(audioContext.sampleRate * 0.1);
 
 						const finalBuffer = new Uint8Array(
-							audioBufferQueue.subarray(0, totalSamples).buffer
+							audioBufferQueue.subarray(0, totalSamples).buffer,
 						);
 
 						audioBufferQueue = audioBufferQueue.subarray(totalSamples);
@@ -44,7 +44,9 @@ export function createMicrophone(stream: MediaStream) {
 			} catch (error) {
 				console.error("Error starting audio recording:", error);
 				throw new Error(
-					`Failed to start recording: ${error instanceof Error ? error.message : String(error)}`
+					`Failed to start recording: ${
+						error instanceof Error ? error.message : String(error)
+					}`,
 				);
 			}
 		},

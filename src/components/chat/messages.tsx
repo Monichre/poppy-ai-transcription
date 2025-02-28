@@ -142,11 +142,14 @@ export function Messages({
 																			{result.points.map(
 																				(point: string, idx: number) => (
 																					<li
-																						key={`point-${idx}-${point.substring(0, 10)}`}
+																						key={`point-${idx}-${point.substring(
+																							0,
+																							10,
+																						)}`}
 																					>
 																						{point}
 																					</li>
-																				)
+																				),
 																			)}
 																		</ul>
 																	)}
