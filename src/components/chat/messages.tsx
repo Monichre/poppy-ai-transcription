@@ -22,9 +22,9 @@ export function Messages({
 			initial={{ opacity: 0, y: 100 }}
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ duration: 0.7, ease: "easeOut" }}
-			className="h-[400px] border rounded-lg flex flex-col w-[50vw] mx-auto"
+			className="h-[400px] border rounded-lg flex flex-col sm:w-screen lg:w-[50vw] mx-auto"
 		>
-			<div className="relative p-6 flex-1 overflow-hidden w-full">
+			<div className="relative sm:p-6 p-2 flex-1 overflow-hidden w-full">
 				<ChatMessageList>
 					{messages.map((message) => (
 						<ChatBubble
@@ -144,12 +144,12 @@ export function Messages({
 																					<li
 																						key={`point-${idx}-${point.substring(
 																							0,
-																							10,
+																							10
 																						)}`}
 																					>
 																						{point}
 																					</li>
-																				),
+																				)
 																			)}
 																		</ul>
 																	)}
@@ -173,7 +173,6 @@ export function Messages({
 											return null;
 									}
 								})}
-								<br />
 							</ChatBubbleMessage>
 						</ChatBubble>
 					))}

@@ -311,7 +311,7 @@ export default function Chat() {
 				</motion.div>
 			)}
 
-			<div className="w-full p-4 flex flex-col items-center justify-center h-screen mx-auto">
+			<div className="w-full  flex flex-col items-center justify-center h-screen mx-auto">
 				<motion.div
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
